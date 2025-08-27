@@ -1,11 +1,16 @@
-import { NextResponse } from 'next/server';
-import { db, initializeTables } from '@/lib/database.js';
-import mockData from './mockData.js';
+import dotenv from 'dotenv';
+import { db, initializeTables } from '../src/lib/database.js';
+import mockData from '../src/app/api/seed/mockData.js';
 
+// Load environment variables from .env.local
+dotenv.config({ path: '.env.local' });
 
-export async function POST() {
+async function seedDatabase() {
   try {
+    // Initialize tables first
+    console.log('Initialize database tables');
     await initializeTables();
+    
     const { meditations, exercises, techniques, ratings, comments, activities, enrollments } = mockData;
     const createdResources = [];
 
@@ -57,7 +62,6 @@ export async function POST() {
         'INSERT INTO users (id, email, name) VALUES (?, ?, ?)',
         ['user1', 'test@example.com', 'Test User']
       );
-      console.log('✅ Mock user created for testing');
     }
 
     // Create an anonymous user for anonymous ratings/comments
@@ -67,7 +71,6 @@ export async function POST() {
         'INSERT INTO users (id, email, name) VALUES (?, ?, ?)',
         ['anonymous', 'anonymous@example.com', 'Anonymous User']
       );
-      console.log('✅ Anonymous user created for anonymous submissions');
     }
 
     // Seed meditations table
@@ -144,22 +147,17 @@ export async function POST() {
 
     // Seed activities table
     let activitiesCreated = 0;
-    console.log('Activities array:', activities);
-    console.log('Activities length:', activities?.length || 0);
     
     if (activities && activities.length > 0) {
       for (const activity of activities) {
         try {
           let existingActivity = await db.findOne('SELECT * FROM activities WHERE code = ?', [activity.code]);
           if (!existingActivity) {
-            console.log('Creating activity:', activity.code);
             await db.query(
               'INSERT INTO activities (code, name, date, time, location, type, availability, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
               [activity.code, activity.name, activity.date, activity.time, activity.location, activity.type, activity.availability, activity.description]
             );
             activitiesCreated++;
-          } else {
-            console.log('Activity already exists:', activity.code);
           }
         } catch (error) {
           console.error('Error creating activity:', activity.code, error);
@@ -171,13 +169,10 @@ export async function POST() {
 
     // Seed enrollments table
     let enrollmentsCreated = 0;
-    console.log('Enrollments array:', enrollments);
-    console.log('Enrollments length:', enrollments?.length || 0);
     
     if (enrollments && enrollments.length > 0) {
       for (const enrollment of enrollments) {
         try {
-          console.log('Creating enrollment for:', enrollment.activity_code, enrollment.email);
           await db.query(
             'INSERT INTO enrollments (activity_code, first_name, last_name, email, phone_number) VALUES (?, ?, ?, ?, ?)',
             [enrollment.activity_code, enrollment.first_name, enrollment.last_name, enrollment.email, enrollment.phone_number]
@@ -190,33 +185,10 @@ export async function POST() {
     } else {
       console.log('No enrollments found in mockData');
     }
-
-    return NextResponse.json({
-      message: 'Database seeded successfully!',
-      resources: createdResources,
-      ratings: ratingsCreated,
-      comments: commentsCreated,
-      activities: activitiesCreated,
-      addresses: addressesCreated,
-      enrollments: enrollmentsCreated,
-      summary: {
-        totalResources: createdResources.length,
-        meditations: meditations.length,
-        exercises: exercises.length,
-        techniques: techniques.length,
-        ratingsSeeded: ratingsCreated,
-        commentsSeeded: commentsCreated,
-        activitiesSeeded: activitiesCreated,
-        addressesSeeded: addressesCreated,
-        enrollmentsSeeded: enrollmentsCreated
-      }
-    });
-
   } catch (error) {
     console.error('Error during seeding:', error);
-    return NextResponse.json(
-      { error: 'Failed to seed database', details: error.message },
-      { status: 500 }
-    );
+    process.exit(1);
   }
 }
+
+seedDatabase();

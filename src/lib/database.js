@@ -6,7 +6,7 @@ dotenv.config({ path: '.env.local' });
 
 // Database configuration function
 function getDbConfig() {
-  return {
+  const config = {
     host: process.env.DB_HOST || 'localhost',
     port: process.env.DB_PORT || 3306,
     user: process.env.DB_USER || 'root',
@@ -16,6 +16,15 @@ function getDbConfig() {
     connectionLimit: 10,
     queueLimit: 0
   };
+
+  // Add SSL configuration for Railway
+  if (process.env.DB_SSL === 'true' || process.env.DB_HOST?.includes('railway')) {
+    config.ssl = {
+      rejectUnauthorized: false
+    };
+  }
+
+  return config;
 }
 
 // Create connection pool
@@ -33,9 +42,9 @@ function createPool() {
     });
     
     pool = mysql.createPool(dbConfig);
-    console.log('✅ MySQL connection pool created successfully');
+    console.log('MySQL connection pool created successfully');
   } catch (error) {
-    console.error('❌ Error creating MySQL connection pool:', error);
+    console.error('Error creating MySQL connection pool:', error);
   }
 }
 
@@ -118,10 +127,10 @@ export async function testConnection() {
     }
     
     await pool.execute('SELECT 1');
-    console.log('✅ Database connection test successful');
+    console.log('Database connection test successful');
     return true;
   } catch (error) {
-    console.error('❌ Database connection test failed:', error);
+    console.error('Database connection test failed:', error);
     return false;
   }
 }
@@ -248,10 +257,10 @@ export async function initializeTables() {
       )
     `);
 
-    console.log('✅ Database tables initialized successfully (users, meditations, exercises, techniques, ratings, simple_ratings, simple_comments, activities, enrollments, addresses)');
+    console.log('Database tables initialized successfully (users, meditations, exercises, techniques, ratings, simple_ratings, simple_comments, activities, enrollments, addresses)');
     return true;
   } catch (error) {
-    console.error('❌ Error initializing database tables:', error);
+    console.error('Error initializing database tables:', error);
     return false;
   }
 }
