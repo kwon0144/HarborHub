@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Harbor Hub 🏥
 
-## Getting Started
+A comprehensive mental health and wellness platform that connects individuals with therapeutic resources, engaging activities, and professional services. Harbor Hub serves as a centralized hub for mental health support, offering both user-facing features and administrative tools.
 
-First, run the development server:
+## 🛠️ Tech Stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Frontend
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Next.js 15** - React framework with App Router
+- **React 19** - Latest React with modern features
+- **Tailwind CSS** - Utility-first CSS framework
+- **Material-UI (MUI)** - React component library
+- **Heroicons & Lucide React** - Icon libraries
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### Backend & APIs
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Next.js API Routes** - Serverless API endpoints
+- **MySQL Database** - Relational database with mysql2 driver
+- **Google APIs** - Calendar integration and Maps services
 
-## Learn More
+### Data Visualization
 
-To learn more about Next.js, take a look at the following resources:
+- **Recharts** - Composable charting library for React
+- **Date-fns & Moment-timezone** - Date manipulation and timezone handling
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Email & Communication
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **EmailJS** - Client-side email service integration
 
-## Deploy on Vercel
+## 🚀 Features
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Online Resources
+- Dynamic Resource Pages
+- Rating & Comment System
+- Embedded YouTube Videos
+<img width="500" height="858" alt="image" src="https://github.com/user-attachments/assets/c79d6759-2ab3-4811-883a-0bf8fcf92c59" />
+<img width="500" height="680" alt="image" src="https://github.com/user-attachments/assets/1c05cd09-4c94-4039-ab16-f61b6299cbe8" />
+<img width="500" height="788" alt="image" src="https://github.com/user-attachments/assets/0cbcc816-2e1a-4cc6-93da-5d6c7c16d933" />
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Engaging Activities
+- Filtering & Search
+- Auto-Send Email Confirmation
+- Admin Management:
+  - Add new activities with detailed descriptions
+  - View comprehensive enrollment lists
+  - Manage activity schedules and capacity
+<img width="500" height="865" alt="image" src="https://github.com/user-attachments/assets/15855e8e-3378-4bf3-86d7-1aa6a7dbf89f" />
+<img width="500" height="862" alt="image" src="https://github.com/user-attachments/assets/657d8049-d977-43c3-8d9c-ec824e1956a2" />
+<img width="500" height="884" alt="image" src="https://github.com/user-attachments/assets/9a1d5f21-0334-484a-9efc-e5d3c0a1149f" />
+<img width="500" height="865" alt="image" src="https://github.com/user-attachments/assets/f330c894-9ba8-4cfb-9d83-d75a35ecb999" />
+
+### Booking Therapy
+
+- Google Calendar Integration
+- Real-time Availability
+- Automated Booking System
+<img width="500" height="852" alt="image" src="https://github.com/user-attachments/assets/27b55739-9822-4d8d-ae39-1d785e4e2eac" />
+<img width="500" height="856" alt="image" src="https://github.com/user-attachments/assets/4420340f-7340-4767-a8bc-492e48a23296" />
+
+### About Us
+
+- Google Maps API Integration
+- Location Services
+<img width="500" height="888" alt="image" src="https://github.com/user-attachments/assets/b18cae99-6c06-4501-b1b3-83416d17f40e" />
+<img width="500" height="841" alt="image" src="https://github.com/user-attachments/assets/3052df61-fb79-4ec5-a0d0-2ca6689f0515" />
+
+### Services Statistics (Admin View)
+
+- Data Visualization
+- Resource Rating Trends
+- Enrollment Analytics
+- Performance Insights
+<img width="500" height="624" alt="image" src="https://github.com/user-attachments/assets/e6d9c932-a23d-4721-8b46-114ccd369106" />
+<img width="500" height="650" alt="image" src="https://github.com/user-attachments/assets/3b791900-9669-4a17-b204-65314dc72676" />
+
+**Built with ❤️ for mental health and wellness**
