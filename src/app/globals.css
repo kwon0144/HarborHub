@@ -1,8 +1,10 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: #f9fafb;
   --foreground: #171717;
+  --navbar-bg: #26435D; /* header background */
+  --hero-bg: #425A73; /* hero background (slightly lighter than navbar) */
 }
 
 @theme inline {
